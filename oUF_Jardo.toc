@@ -1,0 +1,14 @@
+## Interface: 60100
+## Title: oUF: Jardo
+## Author: bunjiboys (Jardo @ US-Hyjal)
+## Version: 0.1.0
+## X-eMail: bunjiboys@gmail.com
+## Dependencies: oUF
+## OptionalDeps: oUF_HolyPower, oUF_PvPTimer
+## Notes: oUF layout
+
+extlibs\oUF_CombatFeedback\oUF_CombatFeedback.lua
+data.lua
+utils.lua
+tags.lua
+main.lua
