@@ -1,7 +1,7 @@
 ## Interface: 60100
 ## Title: oUF: Jardo
 ## Author: bunjiboys (Jardo @ US-Hyjal)
-## Version: 0.1.0
+## Version: 1.0.0
 ## X-eMail: bunjiboys@gmail.com
 ## Dependencies: oUF
 ## OptionalDeps: oUF_HolyPower, oUF_PvPTimer
