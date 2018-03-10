@@ -24,7 +24,7 @@ function Jardo:RaidIcon(self)
     else
         RaidIcon:SetPoint('CENTER', self, 'TOP', 0, 0)
     end
-    self.RaidIcon = RaidIcon
+    self.RaidTargetIndicator = RaidIcon
 end
 
 function Jardo:RoleIcon(self, side)
@@ -35,7 +35,7 @@ function Jardo:RoleIcon(self, side)
     else
         Role:SetPoint('CENTER', self, 'TOPRIGHT', -16, 0)
     end
-    self.LFDRole = Role
+    self.GroupRoleIndicator = Role
 end
 
 function Jardo:RaidStatusIcon(self, side)
@@ -51,15 +51,15 @@ function Jardo:RaidStatusIcon(self, side)
         Assistant:SetPoint('CENTER', self, 'TOPLEFT', 16, 0)
     end
 
-    self.Leader = Leader
-    self.Assistant = Assistant
+    self.LeaderIndicator = Leader
+    self.AssistantIndicator = Assistant
 end
 
 function Jardo:PvPIcon(showTimer, parent, point, anchor, relPoint, x, y)
     local frame = parent.Health:CreateTexture(nil, 'OVERLAY')
     frame:SetSize(32, 32)
     frame:SetPoint(point, anchor, relPoint, x, y)
-    parent.PvP = frame
+    parent.PvPIndicator = frame
 
     if showTimer then
         local timer = parent:CreateFontString(nil, 'OVERLAY', 'GameFontNormal')
@@ -195,7 +195,7 @@ function Jardo:IncomingHeals(self, invert)
         local bar = CreateFrame('StatusBar', nil, parent)
         bar:SetStatusBarTexture(Jardo.Texture)
         bar:SetStatusBarColor(0, 1, 0.5, 0.25)
-        bar:SetWidth(200)
+        bar:SetWidth(20)
 
         if invert == true then
             bar:SetPoint('TOPRIGHT', point, 'TOPLEFT', 0, 0)
