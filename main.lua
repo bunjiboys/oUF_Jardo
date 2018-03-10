@@ -71,7 +71,7 @@ function Jardo:PvPIcon(showTimer, parent, point, anchor, relPoint, x, y)
         timer:SetFont(Jardo.Font, 12)
         timer:SetTextColor(1, 0, 0)
 
-        parent.PvP.Timer = timer
+        parent.PvPIndicator.Timer = timer
     end
 end
 
