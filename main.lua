@@ -123,11 +123,8 @@ function Jardo:ClassPower(self)
     for index = 1, 10 do
         local bar = CreateFrame('StatusBar', nil, self)
         bar:SetSize(12, 12)
-        if index == 1 then
-            bar:SetPoint('BOTTOMLEFT', self, 'TOPLEFT', 0, 2)
-        else
-            bar:SetPoint('BOTTOMLEFT', self, 'TOPLEFT', index * (bar:GetWidth() + 4) - bar:GetWidth(), 2)
-        end
+        local xOffset = (index * bar:GetWidth()) - bar:GetWidth() + (2 * (index - 1))
+        bar:SetPoint('BOTTOMLEFT', self, 'TOPLEFT', xOffset, 2)
 
         ClassPower[index] = bar
     end
