@@ -64,9 +64,9 @@ function Jardo:PvPIcon(showTimer, parent, point, anchor, relPoint, x, y)
     if showTimer then
         local timer = parent:CreateFontString(nil, 'OVERLAY', 'GameFontNormal')
         if x < 0 then
-            timer:SetPoint('LEFT', frame:GetParent(), 'RIGHT', 5, 0)
+            timer:SetPoint('LEFT', frame, 'RIGHT', 0, 0)
         else
-            timer:SetPoint('RIGHT', frame:GetParent(), 'LEFT', -5, 0)
+            timer:SetPoint('RIGHT', frame, 'LEFT', -5, 0)
         end
         timer:SetFont(Jardo.Font, 12)
         timer:SetTextColor(1, 0, 0)
@@ -467,7 +467,7 @@ local DoBuffs = function(self, unit)
     end
 
     Buffs.PostCreateIcon = function(buffs, button)
-        button.overlay:SetTexture('Interface/AddOns/oUF_Jardo/textures/border.tga')
+        button.overlay:SetTexture(Jardo.Border)
         button.overlay:SetPoint('TOPLEFT', button.icon, 'TOPLEFT', -2, 2)
         button.overlay:SetPoint('BOTTOMRIGHT', button.icon, 'BOTTOMRIGHT', 2, -2)
         button.overlay:SetTexCoord(0, 1, 0, 1)
@@ -492,7 +492,7 @@ local DoDebuffs = function(self, unit)
     Debuffs.num = 4
 
     Debuffs.PostCreateIcon = function(buffs, button)
-        button.overlay:SetTexture('Interface/AddOns/oUF_Jardo/textures/border.tga')
+        button.overlay:SetTexture(Jardo.Border)
         button.overlay:SetPoint('TOPLEFT', button.icon, 'TOPLEFT', -2, 2)
         button.overlay:SetPoint('BOTTOMRIGHT', button.icon, 'BOTTOMRIGHT', 2, -2)
         button.overlay:SetTexCoord(0, 1, 0, 1)

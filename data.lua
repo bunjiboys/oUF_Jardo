@@ -1,7 +1,8 @@
 local _, Jardo = ...
 
-Jardo.Texture = [[Interface\AddOns\SharedMedia\statusbar\DarkBottom]]
-Jardo.Font = [[Interface\AddOns\GrizzlySharedMedia\fonts\Myriad.ttf]] 
+Jardo.Texture = 'Interface/AddOns/SharedMedia/statusbar/DarkBottom'
+Jardo.Font = 'Interface/AddOns/oUF_Jardo/resources/Myriad.ttf'
+Jardo.Border = 'Interface/AddOns/oUF_Jardo/resources/border.tga'
 
 Jardo.backdrop = {
    bgFile = "Interface\\Tooltips\\UI-Tooltip-Background", tile = true, tileSize = 16,
