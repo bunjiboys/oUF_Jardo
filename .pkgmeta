@@ -1,0 +1,8 @@
+# set ft=yaml ts=4 sw=4 expandtab
+
+required-dependencies:
+    - oUF
+    - SharedMedia
+
+optional-dependencies:
+    - oUF_PvPTimer
