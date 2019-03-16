@@ -126,6 +126,11 @@ local function combat(self, event, unit, eventType, flags, amount, dtype)
 	end
 
 	if text then
+        if fontHeight < 12 then
+            fontHeight = 12
+        elseif fontHeight > 40 then
+            fontHeight = 40
+        end
 		FeedbackText:SetFont(font,fontHeight,fontFlags)
 		FeedbackText:SetFormattedText(text, arg)
 		FeedbackText:SetTextColor(unpack(color))
@@ -140,6 +145,9 @@ local function addCombat(object)
 	if not object.CombatFeedbackText then return end
 	-- store the original starting height
 	local font, fontHeight, fontFlags = object.CombatFeedbackText:GetFont()
+    if fontHeight <= 0 then
+        fontHeight = 16
+    end
 	object.CombatFeedbackText.origHeight = fontHeight
 	object.CombatFeedbackText.maxAlpha = object.CombatFeedbackText.maxAlpha or maxAlpha
 	createUpdateFrame()

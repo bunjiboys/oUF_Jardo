@@ -265,7 +265,7 @@ local Boss = function(self, unit, isSingle)
     HealthPoints:SetJustifyH(Jardo.anchors[unit].info.anchor)
     HealthPoints:SetFont(Jardo.Font, 12)
     HealthPoints:SetTextColor(1, 1, 1)
-    self:Tag(HealthPoints, '[dead][offline][jardo:shorthealth]')
+    self:Tag(HealthPoints, '[dead] [offline] [jardo:shorthealth]')
     Health.value = HealthPoints
 
     -- Health bar background
@@ -330,7 +330,7 @@ local FocusTT = function(self, unit, isSingle)
     HealthPoints:SetJustifyH(Jardo.anchors[unit].info.anchor)
     HealthPoints:SetFont(Jardo.Font, 12)
     HealthPoints:SetTextColor(1, 1, 1)
-    self:Tag(HealthPoints, '[dead][offline][jardo:shorthealth]')
+    self:Tag(HealthPoints, '[dead] [offline] [jardo:shorthealth]')
     Health.value = HealthPoints
 
     -- Health bar background
@@ -397,7 +397,7 @@ local PlayerTarget = function(self, unit, isSingle)
     HealthPoints:SetJustifyH(Jardo.anchors[unit].info.anchor)
     HealthPoints:SetFont(Jardo.Font, 14)
     HealthPoints:SetTextColor(1, 1, 1)
-    self:Tag(HealthPoints, '[dead][offline][jardo:health]')
+    self:Tag(HealthPoints, '[dead] [offline] [jardo:health]')
     Health.value = HealthPoints
 
     -- Health bar background
