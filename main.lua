@@ -133,7 +133,7 @@ function Jardo:ClassPower(self)
 end
 
 function Jardo:CastBar(self, unit)
-    local Castbar = CreateFrame('StatusBar', nil, self)
+    local Castbar = CreateFrame('StatusBar', nil, self, 'BackdropTemplate')
     Castbar:SetStatusBarTexture(Jardo.Texture)
     Castbar:SetStatusBarColor(1, 0.7, 0, .8)
     Castbar:SetPoint('LEFT', self, 1, 0)
@@ -141,6 +141,9 @@ function Jardo:CastBar(self, unit)
     Castbar:SetPoint('TOP', self, 'BOTTOM', 1, 0)
     Castbar:SetHeight(14)
     Castbar:SetToplevel(true)
+    Castbar:SetBackdrop(Jardo.backdrop)
+    Castbar:SetBackdropColor(0, 0, 0, 0.75)
+    Castbar:SetBackdropBorderColor(0, 0, 0, 0)
 
     local Spark = Castbar:CreateTexture(nil, 'OVERLAY')
     Spark:SetSize(20, 40)
@@ -238,14 +241,14 @@ local Boss = function(self, unit, isSingle)
     self:SetScript('OnLeave', UnitFrame_OnLeave)
     self:RegisterForClicks('AnyUp')
 
-    self:SetBackdrop(Jardo.backdrop)
-    self:SetBackdropColor(0, 0, 0, 1)
-    self:SetBackdropBorderColor(0, 0, 0, 0)
     self:SetSize(200, 48)
     self:SetAlpha(0.8)
 
     -- Health bar
-    local Health = CreateFrame('StatusBar', nil, self)
+    local Health = CreateFrame('StatusBar', nil, self, 'BackdropTemplate')
+    Health:SetBackdrop(Jardo.backdrop)
+    Health:SetBackdropColor(0, 0, 0, 1)
+    Health:SetBackdropBorderColor(0, 0, 0, 0)
     Health:SetStatusBarTexture(Jardo.Texture)
     Health:SetHeight(36)
 
@@ -302,14 +305,14 @@ local FocusTT = function(self, unit, isSingle)
     self:SetScript('OnLeave', UnitFrame_OnLeave)
     self:RegisterForClicks('AnyUp')
 
-    self:SetBackdrop(Jardo.backdrop)
-    self:SetBackdropColor(0, 0, 0, 1)
-    self:SetBackdropBorderColor(0, 0, 0, 0)
     self:SetSize(175, 26)
     self:SetAlpha(0.8)
 
     -- Health bar
-    local Health = CreateFrame('StatusBar', nil, self)
+    local Health = CreateFrame('StatusBar', nil, self, 'BackdropTemplate')
+    Health:SetBackdrop(Jardo.backdrop)
+    Health:SetBackdropColor(0, 0, 0, 1)
+    Health:SetBackdropBorderColor(0, 0, 0, 0)
     Health:SetStatusBarTexture(Jardo.Texture)
     Health:SetHeight(24)
 
@@ -371,14 +374,13 @@ local PlayerTarget = function(self, unit, isSingle)
     self:SetScript('OnLeave', UnitFrame_OnLeave)
 
     self:RegisterForClicks('AnyUp')
-
-    self:SetBackdrop(Jardo.backdrop)
-    self:SetBackdropColor(0, 0, 0, 1)
-    self:SetBackdropBorderColor(0, 0, 0, 0)
     self:SetSize(260, 58)
 
     -- Health bar
-    local Health = CreateFrame('StatusBar', nil, self)
+    local Health = CreateFrame('StatusBar', nil, self, 'BackdropTemplate')
+    Health:SetBackdrop(Jardo.backdrop)
+    Health:SetBackdropColor(0, 0, 0, 1)
+    Health:SetBackdropBorderColor(0, 0, 0, 0)
     Health:SetStatusBarTexture(Jardo.Texture)
     Health:SetHeight(42)
     Health:SetReverseFill(Jardo.anchors[unit].reverse)
