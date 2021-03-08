@@ -1,8 +1,6 @@
 local _, Jardo = ...
 
 local PostUpdateHealth = function(health, unit, min, max)
-    local self = health:GetParent()
-
     if(UnitIsDead(unit)) then
         health:SetValue(0)
     elseif(UnitIsGhost(unit)) then
@@ -16,13 +14,13 @@ local PostUpdatePower = function(power, unit, min, max)
     end
 end
 
-function Jardo:RaidIcon(self)
+function Jardo:RaidIcon(self, side)
     local RaidIcon = self.Health:CreateTexture(nil, 'OVERLAY')
     RaidIcon:SetSize(20, 20)
     if side == 'left' then
-        RaidIcon:SetPoint('CENTER', self, 'TOP', 0, 0)
+        RaidIcon:SetPoint('RIGHT', self, 'LEFT', -10, 0)
     else
-        RaidIcon:SetPoint('CENTER', self, 'TOP', 0, 0)
+        RaidIcon:SetPoint('LEFT', self, 'RIGHT', 10, 0)
     end
     self.RaidTargetIndicator = RaidIcon
 end
@@ -96,18 +94,18 @@ function Jardo:PowerBar(self, showInfo)
 
     -- Power bar values
     local PowerPoints = Power:CreateFontString(nil, 'OVERLAY', 'GameFontNormal')
-    PowerPoints:SetPoint('RIGHT', -2, 1)
+    PowerPoints:SetPoint('RIGHT', -2, 0)
     PowerPoints:SetJustifyH('CENTER')
-    PowerPoints:SetFont(Jardo.Font, 11)
+    PowerPoints:SetFont(Jardo.Font, 10)
     PowerPoints:SetTextColor(1, 1, 1)
     Power.value = PowerPoints
     Power.PostUpdate = PostUpdatePower
 
     if showInfo then
         local Info = Power:CreateFontString(nil, 'OVERLAY', 'GameFontNormal')
-        Info:SetPoint('LEFT', 2, 1)
+        Info:SetPoint('LEFT', 2, 0)
         Info:SetJustifyH('LEFT')
-        Info:SetFont(Jardo.Font, 11)
+        Info:SetFont(Jardo.Font, 10)
         Info:SetTextColor(1, 1, 1)
 
         self:Tag(Info, '[jardo:class]')
@@ -138,7 +136,7 @@ function Jardo:CastBar(self, unit)
     Castbar:SetStatusBarColor(1, 0.7, 0, .8)
     Castbar:SetPoint('LEFT', self, 1, 0)
     Castbar:SetPoint('RIGHT', self, -1, 0)
-    Castbar:SetPoint('TOP', self, 'BOTTOM', 1, 0)
+    Castbar:SetPoint('TOP', self, 'BOTTOM', 1, 1)
     Castbar:SetHeight(14)
     Castbar:SetToplevel(true)
     Castbar:SetBackdrop(Jardo.backdrop)
@@ -285,17 +283,17 @@ local Boss = function(self, unit, isSingle)
     Name:SetTextColor(1, 1, 1)
 
     -- Combat text
-    local cbt = Health:CreateFontString(nil, 'OVERLAY')
-    cbt:SetPoint('CENTER', Health, 'CENTER', 0, 0)
-    cbt:SetFont(Jardo.Font, 12, 'OUTLINE')
-    cbt.maxAlpha = 1
-    cbt.colors = Jardo.cbtColors
-    self.CombatFeedbackText = cbt
+    --local cbt = Health:CreateFontString(nil, 'OVERLAY')
+    --cbt:SetPoint('CENTER', Health, 'CENTER', 0, 0)
+    --cbt:SetFont(Jardo.Font, 12, 'OUTLINE')
+    --cbt.maxAlpha = 1
+    --cbt.colors = Jardo.cbtColors
+    --self.CombatFeedbackText = cbt
 
     self:Tag(Name, '[jardo:name]')
     self.Name = Name
 
-    Jardo:RaidIcon(self)
+    Jardo:RaidIcon(self, 'right')
     Jardo:PowerBar(self, false)
     self.Power:SetHeight(10)
 end
@@ -360,7 +358,11 @@ local FocusTT = function(self, unit, isSingle)
     self:Tag(Name, '[jardo:name]')
     self.Name = Name
 
-    Jardo:RaidIcon(self)
+    if Jardo.anchors[unit].reverse then
+        Jardo:RaidIcon(self, 'left')
+    else
+        Jardo:RaidIcon(self, 'right')
+    end
 end
 
 local Pet = function(self, unit, isSingle)
@@ -376,11 +378,11 @@ local PlayerTarget = function(self, unit, isSingle)
     self:RegisterForClicks('AnyUp')
     self:SetSize(260, 58)
 
-    -- Health bar
+    -- Health barw
     local Health = CreateFrame('StatusBar', nil, self, 'BackdropTemplate')
     Health:SetBackdrop(Jardo.backdrop)
-    Health:SetBackdropColor(0, 0, 0, 1)
-    Health:SetBackdropBorderColor(0, 0, 0, 0)
+    Health:SetBackdropColor(0.4, 0, 0, 1)
+    Health:SetBackdropBorderColor(0, 0, 0, 1)
     Health:SetStatusBarTexture(Jardo.Texture)
     Health:SetHeight(42)
     Health:SetReverseFill(Jardo.anchors[unit].reverse)
@@ -428,7 +430,11 @@ local PlayerTarget = function(self, unit, isSingle)
     self.Name = Name
 
     Jardo:PowerBar(self, unit ~= 'player')
-    Jardo:RaidIcon(self)
+    if Jardo.anchors[unit].reverse then
+        Jardo:RaidIcon(self, 'left')
+    else
+        Jardo:RaidIcon(self, 'right')
+    end
 
     if unit == 'player' then
 		Jardo:Resting(self)
@@ -539,7 +545,7 @@ for idx = 1, MAX_BOSS_FRAMES do
 end
 
 oUF:RegisterStyle('Jardo', PlayerTarget)
-for unit,layout in next, UnitSpecific do
+for unit, layout in next, UnitSpecific do
     -- Capitalize the unit name, so it looks better.
     oUF:RegisterStyle('Jardo - ' .. unit:gsub('^%l', string.upper), layout)
 end
@@ -558,14 +564,14 @@ local spawnHelper = function(self, unit, ...)
 end
 
 oUF:Factory(function(self)
-    local player = spawnHelper(self, 'player', 'BOTTOM', UIParent, 'BOTTOM', -325, 260)
-    local target = spawnHelper(self, 'target', 'BOTTOM', UIParent, 'BOTTOM', 325, 260)
+    local player = spawnHelper(self, 'player', 'BOTTOM', UIParent, 'BOTTOM', -325, 400)
+    local target = spawnHelper(self, 'target', 'BOTTOM', UIParent, 'BOTTOM', 325, 400)
     spawnHelper(self, 'pet', 'BOTTOM', UIParent, 'BOTTOM', 0, 260)
-    spawnHelper(self, 'focus', 'BOTTOMRIGHT', player, 'TOPLEFT', -15, 15)
-    spawnHelper(self, 'targettarget', 'BOTTOMLEFT', target, 'TOPRIGHT', 15, 15)
+    spawnHelper(self, 'focus', 'TOPLEFT', player, 'BOTTOMLEFT', 0, -10)
+    spawnHelper(self, 'targettarget', 'TOPRIGHT', target, 'BOTTOMRIGHT', 0, -5)
     local offset = 0
     for idx = 1, MAX_BOSS_FRAMES do
-        spawnHelper(self, 'boss' .. idx, 'LEFT', UIParent, 'LEFT', 10, offset * 55)
+        spawnHelper(self, 'boss' .. idx, 'LEFT', UIParent, 'LEFT', 200, offset * 55)
         offset = offset + 1
     end
     oUF:DisableBlizzard('raid')

@@ -1,17 +1,18 @@
 local _, Jardo = ...
 
-Jardo.Texture = 'Interface/AddOns/SharedMedia/statusbar/DarkBottom'
+Jardo.Texture = 'Interface/AddOns/SharedMedia/statusbar/Flat'
 Jardo.Font = 'Interface/AddOns/oUF_Jardo/resources/Myriad.ttf'
 Jardo.Border = 'Interface/AddOns/oUF_Jardo/resources/border.tga'
 
 Jardo.backdrop = {
    bgFile = "Interface\\Tooltips\\UI-Tooltip-Background", tile = true, tileSize = 16,
-	edgeFile = "Interface\\Tooltips\\UI-Tooltip-Border", edgeSize = 0,
+	edgeFile = "Interface\\Tooltips\\UI-Tooltip-Border", edgeSize = 1,
 	insets = { left = 0, right = 0, top = 0, bottom = 0 },
 }
 
 Jardo.colors = setmetatable({
-   health = { .45, .73, .27 },
+--    health = { .45, .73, .27 },
+   health = { .55, .83, .37 },
    power = setmetatable({
       MANA = { .4, .58, .93 },
       RAGE = { .73, .27, .27 },
