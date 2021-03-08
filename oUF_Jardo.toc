@@ -1,7 +1,7 @@
 ## Interface: 90002
 ## Title: oUF: Jardo
 ## Author: bunjiboys (Jardo @ US-Mal'Ganis)
-## Version: 9.0.1
+## Version: 9.0.2
 ## X-eMail: bunjiboys@gmail.com
 ## Dependencies: oUF, SharedMedia
 ## OptionalDeps: oUF_PvPTimer
